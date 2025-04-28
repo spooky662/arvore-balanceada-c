@@ -177,7 +177,17 @@ void emOrdem(NO* raiz) {
     }
 }
 
-// Exemplo de uso
+// Impressão bonita da árvore
+void imprime_AVL(NO* raiz, int nivel) {
+    if (raiz != NULL) {
+        imprime_AVL(raiz->dir, nivel + 1);
+        for (int i = 0; i < nivel; i++)
+            printf("    ");
+        printf("%d\n", raiz->info);
+        imprime_AVL(raiz->esq, nivel + 1);
+    }
+}
+
 int main() {
     AVLTree raiz = NULL;
 
@@ -188,15 +198,15 @@ int main() {
     insere_AVLTree(&raiz, 50);
     insere_AVLTree(&raiz, 25);
 
-    printf("Arvore em ordem: ");
+    printf("Árvore em ordem:\n");
     emOrdem(raiz);
-    printf("\n");
+    printf("\n\nÁrvore formatada:\n");
+    imprime_AVL(raiz, 0);
 
     remove_AVLTree(&raiz, 30);
 
-    printf("Arvore apos remover 30: ");
-    emOrdem(raiz);
-    printf("\n");
+    printf("\nÁrvore após remover 30:\n");
+    imprime_AVL(raiz, 0);
 
     return 0;
 }
